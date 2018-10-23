@@ -1,6 +1,6 @@
 # Cahier des charges
 
-On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres).
+On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage ([OCR](https://fr.wikipedia.org/wiki/Reconnaissance_optique_de_caractères) = reconnaissance optique de caracteres).
 
 ##### Sommaire
 
@@ -16,7 +16,7 @@ On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les ticket
 
 ## Objectifs
 
-Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). Il faudra changer ce pattern en MC (model controler) sans le V car il ny a pas de vues a gerer. La structure du projet suit aussi une architecture de type _CQRS_ (command query responsability segregation). Les commandes dun ticket envoient un _Event_ de type _CRUD_ aux _Query_ qui soccupe de manipuler le SGBD.
+Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). Il faudra changer ce pattern en MC (model controler) sans le V car il ny a pas de vues a gerer. La structure du projet suit aussi une architecture de type [CQRS](https://docs.microsoft.com/fr-fr/azure/architecture/guide/architecture-styles/cqrs) (command query responsability segregation). Les commandes dun ticket envoient un _Event_ de type _CRUD_ aux _Query_ qui soccupe de manipuler le SGBD.
 
 > On retrouve ici un pattern de type event/payload/applyEvent/storeSubscribe qui me fait fortement penser a Redux...
 
