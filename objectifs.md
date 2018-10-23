@@ -5,9 +5,9 @@ On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les ticket
 ##### Sommaire
 
 [Objectifs](#objectifs)
-[Le dossier `ticket/command`](#le dossier ticket/command)
+[Ticket/command](#ticket/command)
 [Analyse](#analyse)
-[Le dossier `ticket/query`](#le dossier ticket/query)
+[Ticket/query](#ticket/query)
 
 ## Objectifs
 
@@ -21,7 +21,7 @@ Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). I
 
 > On veillera a se concentrer sur la spec et sur la definition des fonctions métiers.
 
-## Le dossier `ticket/command`
+## Ticket/command
 
 Pour rappel `ticket.js` est un _agregated root_ dans le language DDD. Cest un _CRUD_ (create, read, update, delete). Cette entite na pas dautre metier que de persister. Les handlers sont limplementation concrete du CRUD. `ticket.js` ne fait que suivre le pattern du DDD avec le schéma _payload_ et souscription a une liste d _events_
 
@@ -116,4 +116,4 @@ Prenons lexemple de la fonction `static create(creation)`
 return {object: ticket, events: [ticketCreatedEvent]};
 ```
 
-## Le dossier `ticket/query`
+## ticket/query
