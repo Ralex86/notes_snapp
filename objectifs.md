@@ -2,7 +2,7 @@
 
 ## Ojectif
 
-Je dois réécrire une api `node.js` en ruby on rails. Ce projet gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres).
+Je dois réécrire une api `node.js` en ruby on rails. Celle ci gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres).
 
 Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). Il faudra changer ce pattern en MC (model controler) sans le V car il ny a pas de vues a gerer. La structure du projet suit aussi une architecture de type _CQRS_ (command query responsability segregation). Les commandes dun ticket envoient un _Event_ de type _CRUD_ aux _Query_ qui soccupe de manipuler le SGBD.
 
