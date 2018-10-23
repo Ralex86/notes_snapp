@@ -5,9 +5,9 @@ On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les ticket
 ##### Sommaire
 
 [Objectifs](#objectifs)
-[Le dossier ticket/command](#le dossier `ticket/command`)
+[Le dossier `ticket/command`](#le dossier ticket/command)
 [Analyse](#analyse)
-[Le dossier ticket/query](#le dossier `ticket/query`)
+[Le dossier `ticket/query`](#le dossier ticket/query)
 
 ## Objectifs
 
