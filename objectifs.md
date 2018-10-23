@@ -2,21 +2,12 @@
 
 On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres).
 
-## Table of Contents
-
 ##### Sommaire
 
-[Headers](#headers)  
-[Emphasis](#emphasis)  
-...snip...  
-<a name="headers"/>
-
-## Headers
-
-    * [Objectifs](#Objectifs)
-    * [Le dossier ticket/command](#Le dossier ticket/command)
-    			* [Analyse](#Analyse)
-    * [Le dossier ticket/query](#Le dossier ticket/query)
+[Objectifs](#Objectifs)
+[Le dossier ticket/command](#Le dossier `ticket/command`)
+[Analyse](#Analyse)
+[Le dossier ticket/query](#Le dossier `ticket/query`)
 
 ## Objectifs
 
