@@ -4,13 +4,15 @@ On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les ticket
 
 ##### Sommaire
 
-[Objectifs](#objectifs)
+1. [Objectifs](#objectifs)
 
-[Ticket/command](#ticket/command)
+2. [Ticket/command](#ticket/command)
 
-[Analyse](#analyse)
+   [Analyse](#analyse)
 
-[Ticket/query](#ticket/query)
+3. [Ticket/query](#ticket/query)
+
+4. [Ticket/web](#ticket/web)
 
 ## Objectifs
 
@@ -120,3 +122,84 @@ return {object: ticket, events: [ticketCreatedEvent]};
 ```
 
 ## ticket/query
+
+Regardons la classe TicketCreated
+
+```javascript
+class TicketCreated {
+  constructor(creation) {
+    let {database} = Creation(creation);
+    this._database = database;
+  }
+
+  handle(message) {
+    let {
+      date,
+      payload,
+      aggregateRoot: {id},
+    } = Message(message);
+    let insert = {
+      id,
+      uploaded_at: date,
+      edited_at: payload.editedAt || date,
+      comment: payload.comment,
+      customer_id: payload.customerId,
+      loyalty_card_id: payload.loyaltyCardId,
+      paths: payload.paths,
+      oss_ids: payload.ossIds,
+    };
+    this._database.insert('tickets', insert);
+  }
+
+  get messageType() {
+    return 'TicketCreated';
+  }
+}
+```
+
+- le constructeur initialise lobjet membre `database` avec le wrapper `knexx` dans le package DDD
+- on a une methode pour traiter levenement en question ici: `'TicketCreated'`
+- on a aussy une methode `messageType` pour savoir quel est le nom de levenement
+
+## ticket/web
+
+Cette partie implemente la partie routage de lapi avec le framework Express.
+
+- Le fichier `server.js` configure les middlewares, notament celui de lauthentification.
+- Le fichier `route.js` gère les routes de lapi avec un router et instancie les differentes methodes (GET, POST, DELETE...):
+
+```javascript
+function createRouter(creation) {
+  let {
+    infrastructure: {
+      commandBus,
+      queryBus,
+      services: {fileServiceFactory},
+    },
+  } = creation;
+  let router = new ExpressRouter();
+  router.get('/admin/ping', (request, response) => response.send('OK'));
+  router.post('/tickets', (...args) =>
+    new TicketsPost({commandBus}).handle(...args),
+  );
+  router.get('/tickets', (...args) =>
+    new TicketsGet({queryBus}).handle(...args),
+  );
+  router.get('/tickets/:id/read/:index', (...args) =>
+    new TicketReadGet({queryBus, fileServiceFactory}).handle(...args),
+  );
+  router.put('/tickets/:id', (...args) =>
+    new TicketPut({commandBus}).handle(...args),
+  );
+  router.delete('/tickets/:id', (...args) =>
+    new TicketDelete({commandBus}).handle(...args),
+  );
+  router.get('/tickets/count', (...args) =>
+    new TicketCountGet({queryBus}).handle(...args),
+  );
+  router.delete('/customers/:id', (...args) =>
+    new CustomerDelete({commandBus}).handle(...args),
+  );
+  return router;
+}
+```
