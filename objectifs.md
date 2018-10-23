@@ -2,14 +2,17 @@
 
 ## Ojectif
 
-Je dois réécrire une api `node.js` en ruby on rails. Ce projet gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres). Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). Il faudra changer ce pattern en MV (model controler) sans le V car il ny a pas de vues a gerer. La structure du projet suit aussi une architecture de type _CQRS_ (commabd query responsability segregation). Les commandes dun ticket envoient un _Event_ de type _CRUD_ aux _Query_
+Je dois réécrire une api `node.js` en ruby on rails. Ce projet gère les tickets de caisse des clients et sinsère dans un projet plus large de reconnaissance dimage (OCR = reconnaissance optique de caracteres).
+
+Le pattern utilise dans le projet node est de type DDD (Domain Driven Design). Il faudra changer ce pattern en MC (model controler) sans le V car il ny a pas de vues a gerer. La structure du projet suit aussi une architecture de type _CQRS_ (command query responsability segregation). Les commandes dun ticket envoient un _Event_ de type _CRUD_ aux _Query_ qui soccupe de manipuler le SGBD.
+
+> On retrouve ici un pattern de type event/payload/applyEvent/storeSubscribe qui me fait fortement penser a Redux...
 
 1. Pour la comprehension du projet on se concentrera dabord sur la liste des use cases quon retrouvera dans les repertoires `lib/ticket/command/handler.js` et `lib/ticjet/query/handler`
 2. Ensuite on verra comment acceder a lapi depuis lexterieur dans le dossier `/lib/web`
+3. Enfin dans un dernier temps on commencera un nouveau projet ruby pour re implementer lapi
 
 > On veillera a se concentrer sur la spec et sur la definition des fonctions métiers.
-
-3. Enfin dans un dernier temps on commencera un nouveau projet ruby pour re implementer lapi
 
 ## Le dossier `ticket/command`
 
