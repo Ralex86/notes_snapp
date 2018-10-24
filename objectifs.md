@@ -342,3 +342,68 @@ Pour installer les gems et pg sans erreur il faut finalement faire
 ```bash
 ARCHFLAGS="-arch x86_64" bundle install
 ```
+
+Creation de la base de donnee `fidme_ticket_dev`
+
+```bash
+bundle exec rake db:create
+```
+
+> remarque: les scripts dexecution rake,start... se trouvent dans le dossier `/bin`
+
+Liste de commandes
+
+```bash
+RAILS_ENV=test bundle exec rake db:create
+RAILS_ENV=test bundle exec rake db:migrate
+RAILS_ENV=test bundle exec rake db:rollback
+RAILS_ENV=test bundle exec rake db:drop
+bundle exec rake test
+```
+
+#### Active Record Migrations
+
+Les migrations sont des fonctionnalités de `Active Record` qui permettent de modifier le schéma de la base de donnée.
+Plutot que de modifier des modifications sur le schéma en pure SQL, les migrations permettent de décrire ces changements dans un [DSL = Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language) ruby. (altering database)
+
+Si on prend les migration du projet `node` pour la création dun ticket
+
+```javascript
+exports.up = knex => {
+  return knex.schema.createTable('tickets', table => {
+    table.uuid('id').primary();
+    table.dateTime('uploaded_at');
+    table.dateTime('edited_at');
+    table.dateTime('deleted_at').index();
+    table.text('comment');
+    table.string('customer_id').index();
+    table.string('loyalty_card_id').index();
+    table.specificType('paths', 'varchar[]');
+  });
+};
+```
+
+> pour info perso, remarquons que cetait knex (grunt) qui gerait les migrations
+
+On va maintenant traduire ça en `class` ruby
+
+```ruby
+class CreateTickets < ActiveRecord::Migration[1.0]
+	def change
+		create_table :tickets do |t|
+			t.datetime :uploaded_at
+			t.datetime :edited_at
+			t.datetime :deleted_at
+			t.text :comment
+			t.integer :customer_id
+			t.string :loyalty_card_id
+		end
+	end
+	def down
+    drop_table :tickets
+  end
+end
+```
+
+> remarque la clé primaire est ajoutee automatiquement
+> remarque si on ajoute `t.timestamps` les attributs `created_at` et `updated_at` sont aussi crées et peuplés automatiquement
