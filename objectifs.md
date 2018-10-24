@@ -293,9 +293,30 @@ Dans le projet Rails on modifie le fichier `config/database.yml` pour la ligne d
 ```yml
 development:
   adapter: postgresql
-encoding: unicode
-database: postgres
-pool: 5
-username: snapp
-password: snapp
+  encoding: unicode
+  database: postgres
+  pool: 5
+  username: snapp
+  password: snapp
+```
+
+Resolution du probleme dinstallation de la gem `pg`
+Pour la resolution du chemin vers `pg_config`
+
+```bash
+pgpath=$(find /Applications -name pg_config)
+gem install pg -- --with-pg-config=/$(echo $pgpath)
+```
+
+Resolution de linstall de `pg`
+
+```bash
+sudo su
+env ARCHFLAGS="-arch x86_64" gem install pg
+```
+
+Pour installer les gems et pg sans erreur il faut finalement faire
+
+```bash
+ARCHFLAGS="-arch x86_64" bundle install
 ```
