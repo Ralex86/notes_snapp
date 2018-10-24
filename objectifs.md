@@ -218,7 +218,11 @@ Le but maintenant est de "bootstrapper" un projet RubyOnRails et de traduire lap
 
 2. Ensuite on soccupera de la partie **migration** pour generer la table `tickets`. La logique veut quon construise le modèle `ticket` cest a dire la classe `ticket` afin den faire un **active record**.
 
-> Cest la notion importante dORM (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
+3. On soccupera ensuite du Routing et on mappera les routes sur un controller
+
+4. Enfin on fera des test (mini test et pas airspec)
+
+> La notion importante dORM est importante (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
 
 ```ruby
 a = Ticket.new
@@ -234,10 +238,6 @@ INSERT INTO pieces (id, ossId) VALUES (54321, 12345);
 ```
 
 On parle de **mappage ORM** (object-relational mapping)
-
-3. On soccupera ensuite du Routing et on mappera les routes sur un controller
-
-4. Enfin on fera des test (mini test et pas airspec)
 
 ### Initialisation dun nouveau projet
 
