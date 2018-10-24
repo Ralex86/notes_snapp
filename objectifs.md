@@ -222,7 +222,7 @@ Le but maintenant est de "bootstrapper" un projet RubyOnRails et de traduire lap
 
 4. Enfin on fera des test (mini test et pas airspec)
 
-> La notion importante dORM est importante (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
+> La notion dORM est importante (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
 
 ```ruby
 a = Ticket.new
