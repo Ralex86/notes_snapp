@@ -417,9 +417,9 @@ end
 
 > **Remarque**: si on ajoute `t.timestamps` les attributs `created_at` et `updated_at` sont aussi crées et peuplés automatiquement
 
-> **Remarque**: `you can't redefine the primary key column 'id'. To define a custom primary key, pass { id: false } to create_table.` ne pas oublier de specifier `, :id => false` quand on créer une table
+> **Remarque**: `you can't redefine the primary key column 'id'. To define a custom primary key, pass { id: false } to create_table.` ne pas oublier de specifier `, :id => false` quand on crée une table
 
-Enfin pour executer cette migration et crée effectivement les tables
+Enfin pour executer cette migration et créer effectivement les tables
 
 ```bash
 bundle exec rake db:migrate
