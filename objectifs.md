@@ -288,6 +288,12 @@ Executer postgre dans le conteneur
 docker exec -it pg-snapp-9.6 psql -U snapp -W -d snapp
 ```
 
+Si on veut lister les containers qui ont été lancés ou qui sont lancés
+
+```
+docker ps -a
+```
+
 Dans le projet Rails on modifie le fichier `config/database.yml` pour la ligne developement
 
 ```yml
