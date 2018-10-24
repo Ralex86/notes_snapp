@@ -212,6 +212,31 @@ function createRouter(creation) {
 
 ## RubyOnRails
 
+Le but maintenant est de "bootstrapper" un projet RubyOnRails et de traduire lapi en MVC avec une architecture **3-tiers** (controller, model, SGBD). On va se familiariser un peu avec lenvironement ruby et la notion de gems, similaire au packages npm de `node_modules`.
+
+1. Dans un premier temps on va brancher le projet avec une base de donnée type postgre préconfigurée sur une image docker.
+2. Ensuite on soccupera de la partie **migration** pour generer la table `tickets`. La logique veut quon construise le modèle `ticket` cest a dire la classe `ticket` afin den faire un **active record**.
+
+> un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
+
+    ```ruby
+    	a = Ticket.new
+    	a.id = 54321
+    	a.ossId = 12345
+    	a.save
+    ```
+    va créer un nouveau tuple dans la base avec les valeurs correspondantes, et est exactement équivalent à la requête SQL suivante :
+
+    ```sql
+    INSERT INTO pieces (id, ossId) VALUES (54321, 12345);
+    ```
+
+    	On parle de **mappage ORM** (object-relational mapping)
+
+3. On soccupera ensuite du Routing et on mappera les routes sur un controller
+
+4. Enfin on fera des test (mini test et pas airspec)
+
 ### Initialisation dun nouveau projet
 
 Linitialisation dun projet ruby suit un peu la logique dun projet `node.js`. On installe des gems (~ npm packages dans `node_modules`). Ces dépendances sont listées dans un fichier `Gemfile` (~ `package.json`). Pour installer ces packages on execute (~ `npm install`): `bundle install`.
@@ -233,7 +258,7 @@ gem install bundler
 Executer la commande bundle, lire le `Gemfile` et installer toutes les gems.
 
 ```bash
-gem install bundler
+bundle install
 ```
 
 ### Configuration
@@ -243,4 +268,4 @@ Quelques gems utiles:
 - `gem 'pg'` remplace `sqlite` par defaut cest le sgbd postgres
 - `gem 'puma'` cest lequivalent dexpress pour node
 - `turbolink` cest lequivalent dun router pour gerer les SPA
-- `gem 'spring-watcher-listen', '~> 2.0.0'` cest lequivalent de `nodemon` pour faire un refresh sans restart le server
+- `gem 'spring-watcher-listen'` cest lequivalent de `nodemon` pour faire un refresh sans restart le server
