@@ -419,6 +419,12 @@ end
 
 > **Remarque**: `you can't redefine the primary key column 'id'. To define a custom primary key, pass { id: false } to create_table.` ne pas oublier de specifier `, :id => false` quand on créer une table
 
+Enfin pour executer cette migration et crée effectivement les tables
+
+```bash
+bundle exec rake db:migrate
+```
+
 Pour revenir en arriere avant migration, on "rollback"
 
 ```bash
