@@ -16,7 +16,7 @@ On doit réécrire une api `node.js` en ruby on rails. Celle ci gère les ticket
 
    [lib/web](#ticket/web)
 
-4. [Nouveau projet rubyOnRails](#nouveau projet rubyOnRails)
+4. [RubyOnRails](#rubyOnRails)
 
 ## Objectifs
 
@@ -210,4 +210,37 @@ function createRouter(creation) {
 }
 ```
 
-## Nouveau projet rubyOnRails
+## RubyOnRails
+
+### Initialisation dun nouveau projet
+
+Linitialisation dun projet ruby suit un peu la logique dun projet `node.js`. On installe des gems (~ npm packages dans `node_modules`). Ces dépendances sont listées dans un fichier `Gemfile` (~ `package.json`). Pour installer ces packages on execute (~ `npm install`): `bundle install`.
+
+> Note: changer version du projet en 2.5 et ne pas utiliser la version globale
+
+Pour commencer un nouveau projet
+
+```bash
+rails new Projet
+```
+
+Installer le bundler
+
+```bash
+gem install bundler
+```
+
+Executer la commande bundle, lire le `Gemfile` et installer toutes les gems.
+
+```bash
+gem install bundler
+```
+
+### Configuration
+
+Quelques gems utiles:
+
+- `gem 'pg'` remplace `sqlite` par defaut cest le sgbd postgres
+- `gem 'puma'` cest lequivalent dexpress pour node
+- `turbolink` cest lequivalent dun router pour gerer les SPA
+- `gem 'spring-watcher-listen', '~> 2.0.0'` cest lequivalent de `nodemon` pour faire un refresh sans restart le server
