@@ -215,23 +215,25 @@ function createRouter(creation) {
 Le but maintenant est de "bootstrapper" un projet RubyOnRails et de traduire lapi en MVC avec une architecture **3-tiers** (controller, model, SGBD). On va se familiariser un peu avec lenvironement ruby et la notion de gems, similaire au packages npm de `node_modules`.
 
 1. Dans un premier temps on va brancher le projet avec une base de donnée type postgre préconfigurée sur une image docker.
+
 2. Ensuite on soccupera de la partie **migration** pour generer la table `tickets`. La logique veut quon construise le modèle `ticket` cest a dire la classe `ticket` afin den faire un **active record**.
 
-> un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
+> Cest la notion importante dORM (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
 
-    ```ruby
-    	a = Ticket.new
-    	a.id = 54321
-    	a.ossId = 12345
-    	a.save
-    ```
-    va créer un nouveau tuple dans la base avec les valeurs correspondantes, et est exactement équivalent à la requête SQL suivante :
+```ruby
+a = Ticket.new
+a.id = 54321
+a.ossId = 12345
+a.save
+```
 
-    ```sql
-    INSERT INTO pieces (id, ossId) VALUES (54321, 12345);
-    ```
+va créer un nouveau tuple dans la base avec les valeurs correspondantes, et est exactement équivalent à la requête SQL suivante :
 
-    	On parle de **mappage ORM** (object-relational mapping)
+```sql
+INSERT INTO pieces (id, ossId) VALUES (54321, 12345);
+```
+
+On parle de **mappage ORM** (object-relational mapping)
 
 3. On soccupera ensuite du Routing et on mappera les routes sur un controller
 
