@@ -290,20 +290,36 @@ docker exec -it pg-snapp-9.6 psql -U snapp -W -d snapp
 
 Si on veut lister les containers qui ont été lancés ou qui sont lancés
 
-```
+```bash
 docker ps -a
+```
+
+Si par exemple on a un seul container dactif et quon veut rentrer dans le bash du systeme dexploitation qui y tourne
+
+```bash
+# NR => deuxieme ligne,  $1 => 1er mot
+docker ps | awk 'NR==2 {print $1}'
 ```
 
 Dans le projet Rails on modifie le fichier `config/database.yml` pour la ligne developement
 
 ```yml
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: postgres
-  pool: 5
-  username: snapp
-  password: snapp
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: # utilisateur root par defaut
+  password: # mot de passe root par defaut
+  host: localhost
+
+development:
+  <<: *default
+  database: fidme_ticket_dev
+
+test:
+  <<: *default
+  database: fidme_ticket_test
 ```
 
 Resolution du probleme dinstallation de la gem `pg`
