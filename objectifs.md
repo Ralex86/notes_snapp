@@ -389,19 +389,19 @@ On va maintenant traduire ça en `class` ruby
 
 ```ruby
 class CreateTickets < ActiveRecord::Migration[1.0]
-	def change
-		create_table :tickets do |t|
-			t.datetime :uploaded_at
-			t.datetime :edited_at
-			t.datetime :deleted_at
-			t.text :comment
-			t.integer :customer_id
-			t.string :loyalty_card_id
-		end
+def change
+	create_table :tickets do |t|
+		t.datetime :uploaded_at
+		t.datetime :edited_at
+		t.datetime :deleted_at
+		t.text :comment
+		t.integer :customer_id
+		t.string :loyalty_card_id
 	end
-	def down
-    drop_table :tickets
-  end
+end
+def down
+	drop_table :tickets
+end
 end
 ```
 
