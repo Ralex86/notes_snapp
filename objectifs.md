@@ -398,7 +398,7 @@ On modifie ce fichier et on cree la classe `CreateTickets`
 ```ruby
 class CreateTickets < ActiveRecord::Migration[1.0]
 	def change
-		create_table :tickets do |t|
+		create_table :tickets, :id => false do |t|
 		t.uuid :id
 		t.datetime :uploaded_at
 		t.datetime :edited_at
@@ -413,5 +413,14 @@ class CreateTickets < ActiveRecord::Migration[1.0]
 end
 ```
 
-> remarque la clé primaire est ajoutee automatiquement
-> remarque si on ajoute `t.timestamps` les attributs `created_at` et `updated_at` sont aussi crées et peuplés automatiquement
+> **Remarque**: la clé primaire est ajoutee automatiquement
+
+> **Remarque**: si on ajoute `t.timestamps` les attributs `created_at` et `updated_at` sont aussi crées et peuplés automatiquement
+
+> **Remarque**: `you can't redefine the primary key column 'id'. To define a custom primary key, pass { id: false } to create_table.` ne pas oublier de specifier `, :id => false` quand on créer une table
+
+Pour revenir en arriere avant migration, on "rollback"
+
+```bash
+bundle exec rake db:rollback
+```
