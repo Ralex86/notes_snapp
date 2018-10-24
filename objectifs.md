@@ -222,7 +222,9 @@ Le but maintenant est de "bootstrapper" un projet RubyOnRails et de traduire lap
 
 4. Enfin on fera des test (mini test et pas airspec)
 
-> La notion dORM est importante (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `ticket`, est lié à un tuple de la base
+### Rappel notion ORM
+
+> La notion dORM est importante (voir cours JEE et framework Hybernate). Un objet `ticket`, instance de la classe `Ticket`, est lié à un tuple de la base
 
 ```ruby
 a = Ticket.new
@@ -237,7 +239,7 @@ va créer un nouveau tuple dans la base avec les valeurs correspondantes, et est
 INSERT INTO pieces (id, ossId) VALUES (54321, 12345);
 ```
 
-On parle de **mappage ORM** (object-relational mapping)
+On parle de **ORM** (object-relational mapping)
 
 ### Initialisation dun nouveau projet
 
@@ -271,3 +273,29 @@ Quelques gems utiles:
 - `gem 'puma'` cest lequivalent dexpress pour node
 - `turbolink` cest lequivalent dun router pour gerer les SPA
 - `gem 'spring-watcher-listen'` cest lequivalent de `nodemon` pour faire un refresh sans restart le server
+
+### Branchage avec base de donnee postgreSQL
+
+Creation dune database dans le conteneur docker `pg-snapp-9.6` avec un utilisateur `snapp` et son password associé
+
+```bash
+docker run --name pg-snapp-9.6 -p 5432:5432 -e POSTGRES_PASSWORD=snapp -e POSTGRES_USER=snapp -e POSTGRES_DB=snapp -d postgres:9.6
+```
+
+Executer postgre dans le conteneur
+
+```bash
+docker exec -it pg-snapp-9.6 psql -U snapp -W -d snapp
+```
+
+Dans le projet Rails on modifie le fichier `config/database.yml` pour la ligne developement
+
+```yml
+development:
+  adapter: postgresql
+encoding: unicode
+database: postgres
+pool: 5
+username: snapp
+password: snapp
+```
