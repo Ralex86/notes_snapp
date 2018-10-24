@@ -387,6 +387,14 @@ exports.up = knex => {
 
 On va maintenant traduire ça en `class` ruby
 
+Tout dabord on cree une nouvelle migration avec la commande suivante (generation de timestamp UTC automatique)
+
+```bash
+rails generate migration CreateTicket
+```
+
+On modifie ce fichier et on cree la classe `CreateTickets`
+
 ```ruby
 class CreateTickets < ActiveRecord::Migration[1.0]
 	def change
@@ -396,9 +404,8 @@ class CreateTickets < ActiveRecord::Migration[1.0]
 		t.datetime :edited_at
 		t.datetime :deleted_at
 		t.text :comment
-		t.string :customer_id
+		t.string :customer_id, index: true
 		t.string :loyalty_card_id
-		t.index :true
 	end
 	def down
 		drop_table :tickets
