@@ -431,11 +431,27 @@ Pour revenir en arriere avant migration, on "rollback"
 bundle exec rake db:rollback
 ```
 
+#### Seed database
+
+On souhaite peupler la base `Ticket` avec des "fake" données. Pour ça on va utiliser la gem `fake`. On ajoute `gem 'fake'`, puis on execute la commande `bundle install` pour installer cette gem.
+
+On ajoute dans le fichier `/db/seeds.rb`
+
+```ruby
+5.times do
+	Ticket.create({
+		comment: Faker::Lorem.sentence
+	})
+end
+```
+
+Puis on execute la commande `rails db:seeds`
+
 #### Model Ticket
 
 On va creer maintenant le modèle `Ticket`
 
-```rails
+```ruby
 class Ticket < ApplicationRecord
 
   validates :id, presence: true
@@ -465,7 +481,7 @@ end
 
 On crée le controleur `TicketsController`
 
-```rails
+```ruby
 class TicketsController < ActionController::Base
 	def index
 		@tickets = Ticket.order('edited_at DESC')
