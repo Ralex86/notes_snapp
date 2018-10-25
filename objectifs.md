@@ -430,3 +430,46 @@ Pour revenir en arriere avant migration, on "rollback"
 ```bash
 bundle exec rake db:rollback
 ```
+
+#### Model Ticket
+
+On va creer maintenant le modèle `Ticket`
+
+```rails
+class Ticket < ApplicationRecord
+
+  validates :id, presence: true
+  validates :customer_id, presence: true
+
+  after_initialize :set_default_values, on: :create
+  before_validation :format_edited_at, on: :create
+  after_save :loyalty_card_id_formated
+
+  def set_default_values
+    self.id ||= SecureRandom.uuid
+		self.loyalty_card_id ||= SecureRandom.uuid
+		self.customer_id ||= SecureRandom.uuid
+  end
+
+  def format_edited_at
+    self.edited_at = Time.zone.now.utc
+  end
+
+  def loyalty_card_id_formated
+    self.loyalty_card_id = loyalty_card_id.to_s + '000'
+  end
+end
+```
+
+#### Controller Ticket
+
+On crée le controleur `TicketsController`
+
+```rails
+class TicketsController < ActionController::Base
+	def index
+		@tickets = Ticket.order('edited_at DESC')
+		render json: {status: 'SUCCESS', message: 'Loaded tickets', data: @tickets}, status: :ok
+	end
+end
+```
