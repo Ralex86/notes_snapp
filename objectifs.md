@@ -489,3 +489,35 @@ class TicketsController < ActionController::Base
 	end
 end
 ```
+
+#### Resultat
+
+Lorsqu'on fait la requete suivant dans un navigateur ou postman: `http://localhost:3000/tickets`, on obtient la réponse suivante:
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "Loaded tickets",
+  "data": [
+    {
+      "id": "064778ea-76a4-4f3f-9a17-6366b78a37ad",
+      "uploaded_at": null,
+      "edited_at": "2018-10-25T13:52:32.629Z",
+      "deleted_at": null,
+      "comment": null,
+      "customer_id": "5e4249dd-63e4-4fb5-a3a7-7736c4f93ebc",
+      "loyalty_card_id": "c5db8ee1-81c3-4544-baf0-8f56dee4b0f0"
+    },
+    {
+      "id": "f7aac653-26ce-46d0-a584-c7f69386d650",
+      "uploaded_at": null,
+      "edited_at": "2018-10-25T13:08:05.520Z",
+      "deleted_at": null,
+      "comment": "Ipsa perferendis et voluptatum.",
+      "customer_id": "e950fdf8-267b-4c3f-97c3-14fa782a86fa",
+      "loyalty_card_id": "9629d920-1493-4dd2-a61e-cb38289a2158"
+    },
+		...
+  ]
+}
+```
